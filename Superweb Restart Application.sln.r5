@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Superweb Restart Application", "Superweb Restart Application\Superweb Restart Application.csproj", "{1C57AFBA-CF2C-428D-B532-96AFD62672BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Default = Debug|Default
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Default = Release|Default
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|Default.ActiveCfg = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|Default.Build.0 = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Release|Default.ActiveCfg = Release|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Release|Default.Build.0 = Release|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1C57AFBA-CF2C-428D-B532-96AFD62672BF}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

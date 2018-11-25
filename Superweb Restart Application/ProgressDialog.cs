@@ -1,0 +1,71 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace Superweb_Restart_Application
+{
+    public partial class ProgressDialog : Form
+    {
+        public ProgressDialog()
+        {
+            InitializeComponent();
+        }
+
+        public void ChangeLabel(string s)
+        {
+            label1.Text = s;
+        }
+
+        private void ProgressDialog_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void UpdateProgress(int progress)
+        {
+            if (progressBar1.InvokeRequired)
+            {
+                progressBar1.BeginInvoke(
+                    new Action(() =>
+                    {
+                        progressBar1.Value = progress;
+                    }
+                ));
+            }
+            else
+            {
+                progressBar1.Value = progress;
+            }
+        }
+
+        public void SetIndeterminate(bool isIndeterminate)
+        {
+            if (progressBar1.InvokeRequired)
+            {
+                progressBar1.BeginInvoke(
+                    new Action(() =>
+                    {
+                        if (isIndeterminate)
+                        {
+                            progressBar1.Style = ProgressBarStyle.Marquee;
+                        }
+                        else
+                        {
+                            progressBar1.Style = ProgressBarStyle.Blocks;
+                        }
+                    }
+                ));
+            }
+            else
+            {
+                if (isIndeterminate)
+                {
+                    progressBar1.Style = ProgressBarStyle.Marquee;
+                }
+                else
+                {
+                    progressBar1.Style = ProgressBarStyle.Blocks;
+                }
+            }
+        }
+    }
+}
