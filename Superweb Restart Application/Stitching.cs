@@ -27,11 +27,11 @@ namespace Superweb_Restart_Application
 
         private void Stitching_Load(object sender, EventArgs e)
         {
-            checkStitch();
-            checkReg();
+            CheckStitch();
+            CheckReg();
         }
 
-        public void checkStitch()
+        public void CheckStitch()
         {
             doc = new XmlDocument();
             doc.Load(Descanso);
@@ -39,7 +39,7 @@ namespace Superweb_Restart_Application
             label11.Text = root.GetElementsByTagName("stitchingEnabledSetting")[0].InnerText;
         }
 
-        public void checkReg()
+        public void CheckReg()
         {
             try
             {
@@ -137,6 +137,8 @@ namespace Superweb_Restart_Application
 
                         i++;
                     }
+
+
                     Cursor.Current = Cursors.Default;
                 }
                 else if (button1.Text == "Disable Stitching")
@@ -197,7 +199,7 @@ namespace Superweb_Restart_Application
                     progressDialog.Close();
                     Cursor.Current = Cursors.Default;
                 }
-                checkReg();
+                CheckReg();
             }
             catch (Exception exception)
             {

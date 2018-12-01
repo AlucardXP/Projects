@@ -40,9 +40,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SetEnginesBtn = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.ApplyBtn = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -162,25 +164,16 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Aspen 3:";
             // 
-            // button1
+            // SetEnginesBtn
             // 
-            this.button1.Location = new System.Drawing.Point(51, 270);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 27);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Set Engines";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(117, 301);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 27);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Apply";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SetEnginesBtn.Location = new System.Drawing.Point(51, 270);
+            this.SetEnginesBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.SetEnginesBtn.Name = "SetEnginesBtn";
+            this.SetEnginesBtn.Size = new System.Drawing.Size(99, 27);
+            this.SetEnginesBtn.TabIndex = 3;
+            this.SetEnginesBtn.Text = "Set Engines";
+            this.SetEnginesBtn.UseVisualStyleBackColor = true;
+            this.SetEnginesBtn.Click += new System.EventHandler(this.SetEnginesBtn_Click);
             // 
             // button3
             // 
@@ -191,16 +184,47 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "Close";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // ApplyBtn
+            // 
+            this.ApplyBtn.Location = new System.Drawing.Point(117, 301);
+            this.ApplyBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.ApplyBtn.Name = "ApplyBtn";
+            this.ApplyBtn.Size = new System.Drawing.Size(56, 27);
+            this.ApplyBtn.TabIndex = 4;
+            this.ApplyBtn.Text = "Apply";
+            this.ApplyBtn.UseVisualStyleBackColor = true;
+            this.ApplyBtn.Click += new System.EventHandler(this.ApplyBtn_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(24, 395);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "label10";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(71, 395);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "label11";
             // 
             // StitchOffset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(203, 337);
+            this.ClientSize = new System.Drawing.Size(203, 334);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ApplyBtn);
+            this.Controls.Add(this.SetEnginesBtn);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -213,6 +237,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -229,8 +254,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SetEnginesBtn;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ApplyBtn;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }
