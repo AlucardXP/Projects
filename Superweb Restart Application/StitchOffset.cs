@@ -17,8 +17,6 @@ namespace Superweb_Restart_Application
 {
     public partial class StitchOffset : Form
     {
-        private XmlDocument doc;
-        private XmlElement root;
         public string PATH1 = @"C:\Test\BorregoInit1.xml";
         public string PATH2 = @"C:\Test\BorregoInit2.xml";
         public string PATH3 = @"C:\Test\BorregoInit3.xml";

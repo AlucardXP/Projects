@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Superweb_Restart_Application
 {
@@ -33,10 +34,8 @@ namespace Superweb_Restart_Application
 
         public void CheckStitch()
         {
-            doc = new XmlDocument();
-            doc.Load(Descanso);
-            root = doc.DocumentElement;
-            label11.Text = root.GetElementsByTagName("stitchingEnabledSetting")[0].InnerText;
+            XDocument xDoc = XDocument.Load(Descanso);
+            label6.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
         }
 
         public void CheckReg()
@@ -102,6 +101,10 @@ namespace Superweb_Restart_Application
             {
                 if (button1.Text == "Enable Stitching")
                 {
+                    XDocument xDoc = XDocument.Load(Descanso);
+                    xDoc.Descendants("stitchingEnabledSetting").First().Value = "True";
+                    xDoc.Save(Descanso);
+
                     Cursor.Current = Cursors.WaitCursor;
                     int i = 1;
                     while (i < 5)
@@ -143,6 +146,10 @@ namespace Superweb_Restart_Application
                 }
                 else if (button1.Text == "Disable Stitching")
                 {
+                    XDocument xDoc = XDocument.Load(Descanso);
+                    xDoc.Descendants("stitchingEnabledSetting").First().Value = "False";
+                    xDoc.Save(Descanso);
+
                     Cursor.Current = Cursors.WaitCursor;
                     int i = 1;
                     while (i < 5)
