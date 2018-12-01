@@ -302,7 +302,7 @@ namespace Superweb_Restart_Application
 
             //Checkboxes
             checkBox1.Enabled = true;
-            checkBox2.Enabled = true;
+            //checkBox2.Enabled = true;
             checkBox3.Enabled = true;
         }
 

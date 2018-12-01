@@ -20,8 +20,6 @@ namespace Superweb_Restart_Application
             InitializeComponent();
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             toolStripStatusLabel1.Text = "";
-
-
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -298,61 +296,9 @@ namespace Superweb_Restart_Application
                 }
 
             }
-            else if (comboBox1.Text == "Gymea Computers")
-            {
-                gymeaReboot();
-            }
             else if (comboBox1.Text == "Moby Computers - RIT")
             {
                 mobyRITReboot();
-            }
-        }
-
-        private void gymeaReboot()
-        {
-            // Remote to each Boreggo and start a restart command for 4 Gymeas per machine
-            // Use a batch file on the remote Boreggo that will launch plink and reboot all gymeas associated with each boreggo
-            {
-                // Remote to each Boreggo and start a restart command for 4 Gymeas per machine
-                // Use a batch file on the remote Boreggo that will launch plink and reboot all gymeas associated with each boreggo
-                string aspen = "";
-                string filePath = @"c:\putty\psexec.exe";
-
-                if (toolStripStatusLabel1.Text == "192.168.131.41")
-                {
-                    aspen = ConfigurationManager.AppSettings.Get("Borrego 1");
-                }
-                if (toolStripStatusLabel1.Text == "192.168.132.41")
-                {
-                    aspen = ConfigurationManager.AppSettings.Get("Borrego 2");
-                }
-                if (toolStripStatusLabel1.Text == "192.168.133.41")
-                {
-                    aspen = ConfigurationManager.AppSettings.Get("Borrego 3");
-                }
-                if (toolStripStatusLabel1.Text == "192.168.134.41")
-                {
-                    aspen = ConfigurationManager.AppSettings.Get("Borrego 4");
-                }
-                try
-                {
-                    Process processInfo = new Process();
-                    processInfo.StartInfo.FileName = filePath;
-                    processInfo.StartInfo.Arguments = @"\\" + aspen + @" C:\putty\restartgymea.bat";
-                    processInfo.StartInfo.UseShellExecute = false;
-                    processInfo.StartInfo.CreateNoWindow = true;
-                    processInfo.StartInfo.RedirectStandardError = true;
-                    processInfo.StartInfo.RedirectStandardOutput = true;
-                    processInfo.StartInfo.RedirectStandardInput = true;
-                    processInfo.Start();
-
-                    processInfo.WaitForExit();
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
             }
         }
 

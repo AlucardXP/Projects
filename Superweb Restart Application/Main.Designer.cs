@@ -70,7 +70,7 @@
             this.toolStripStatusLabel1});
             statusStrip1.Location = new System.Drawing.Point(0, 217);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(321, 22);
+            statusStrip1.Size = new System.Drawing.Size(324, 22);
             statusStrip1.SizingGrip = false;
             statusStrip1.Stretch = false;
             statusStrip1.TabIndex = 1;
@@ -107,7 +107,7 @@
             this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(321, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(324, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -265,7 +265,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(321, 239);
+            this.ClientSize = new System.Drawing.Size(324, 239);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
