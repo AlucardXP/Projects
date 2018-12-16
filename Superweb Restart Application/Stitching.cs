@@ -56,7 +56,7 @@ namespace Superweb_Restart_Application
 
                         ConnectionOptions oConn = new ConnectionOptions();
                         //oConn.Username = "memjet";
-                        //oConn.Password = "memjet1";
+                        oConn.Password = "memjet1";
                         System.Management.ManagementScope scope = new System.Management.ManagementScope(@"\\" + ServerName + @"\root\default", oConn);
 
                         scope.Options.EnablePrivileges = true;
