@@ -53,6 +53,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             statusStrip1 = new System.Windows.Forms.StatusStrip();
             statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -68,9 +70,9 @@
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel1});
-            statusStrip1.Location = new System.Drawing.Point(0, 217);
+            statusStrip1.Location = new System.Drawing.Point(0, 136);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new System.Drawing.Size(324, 22);
+            statusStrip1.Size = new System.Drawing.Size(340, 22);
             statusStrip1.SizingGrip = false;
             statusStrip1.Stretch = false;
             statusStrip1.TabIndex = 1;
@@ -107,7 +109,7 @@
             this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(324, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(340, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,7 +128,7 @@
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
             this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
-            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.CheckForUpdateToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -138,51 +140,55 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.Enabled = false;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // statusToolStripMenuItem
             // 
+            this.statusToolStripMenuItem.Enabled = false;
             this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
             this.statusToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.statusToolStripMenuItem.Text = "Status";
-            this.statusToolStripMenuItem.Click += new System.EventHandler(this.statusToolStripMenuItem_Click);
+            this.statusToolStripMenuItem.Click += new System.EventHandler(this.StatusToolStripMenuItem_Click);
             // 
             // StitchingStripMenuItem1
             // 
             this.StitchingStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stitchingOffsetToolStripMenuItem,
             this.stitchOverlapToolStripMenuItem});
+            this.StitchingStripMenuItem1.Enabled = false;
             this.StitchingStripMenuItem1.Name = "StitchingStripMenuItem1";
             this.StitchingStripMenuItem1.Size = new System.Drawing.Size(66, 20);
             this.StitchingStripMenuItem1.Text = "Stitching";
             // 
             // stitchingOffsetToolStripMenuItem
             // 
+            this.stitchingOffsetToolStripMenuItem.Enabled = false;
             this.stitchingOffsetToolStripMenuItem.Name = "stitchingOffsetToolStripMenuItem";
             this.stitchingOffsetToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.stitchingOffsetToolStripMenuItem.Text = "Stitching Offset";
-            this.stitchingOffsetToolStripMenuItem.Click += new System.EventHandler(this.stitchingOffsetToolStripMenuItem_Click);
+            this.stitchingOffsetToolStripMenuItem.Click += new System.EventHandler(this.StitchingOffsetToolStripMenuItem_Click);
             // 
             // stitchOverlapToolStripMenuItem
             // 
             this.stitchOverlapToolStripMenuItem.Name = "stitchOverlapToolStripMenuItem";
             this.stitchOverlapToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.stitchOverlapToolStripMenuItem.Text = "Stitch Overlap";
-            this.stitchOverlapToolStripMenuItem.Click += new System.EventHandler(this.stitchOverlapToolStripMenuItem_Click);
+            this.stitchOverlapToolStripMenuItem.Click += new System.EventHandler(this.StitchOverlapToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // testToolStripMenuItem
             // 
@@ -190,37 +196,37 @@
             this.testToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.testToolStripMenuItem.Text = "Test";
             this.testToolStripMenuItem.Visible = false;
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click_1);
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.TestToolStripMenuItem_Click_1);
             // 
             // checkedListBox1
             // 
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(158, 84);
+            this.checkedListBox1.Location = new System.Drawing.Point(158, 187);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(148, 79);
             this.checkedListBox1.TabIndex = 3;
             this.checkedListBox1.Visible = false;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.CheckedListBox1_SelectedIndexChanged);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(231, 184);
+            this.button1.Location = new System.Drawing.Point(231, 272);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Restart";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(23, 84);
+            this.comboBox1.Location = new System.Drawing.Point(23, 187);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // notifyIcon1
             // 
@@ -253,19 +259,40 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 194);
+            this.label2.Location = new System.Drawing.Point(66, 100);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.Size = new System.Drawing.Size(58, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Stitching Overlap is";
-            this.label2.Visible = false;
+            this.label2.Text = "Stitching is";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(196, 95);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(130, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "label3";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(324, 239);
+            this.ClientSize = new System.Drawing.Size(340, 158);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -317,6 +344,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem stitchingOffsetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stitchOverlapToolStripMenuItem;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

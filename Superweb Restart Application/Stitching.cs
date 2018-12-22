@@ -9,17 +9,18 @@ using System.Linq;
 using System.Management;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
 namespace Superweb_Restart_Application
 {
-    public partial class Stitching : Form
+     public partial class Stitching : Form
     {
         private XmlDocument doc;
         private XmlElement root;
-        public string Descanso = @"C:\Test\DescansoInit.xml";
+        public string Descanso = @"C:\inetpubCedar\config\DescansoInit.xml";
 
         public Stitching()
         {
@@ -29,13 +30,45 @@ namespace Superweb_Restart_Application
         private void Stitching_Load(object sender, EventArgs e)
         {
             CheckStitch();
-            CheckReg();
+            CheckReg1();
         }
 
         public void CheckStitch()
         {
             XDocument xDoc = XDocument.Load(Descanso);
-            label6.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
+            label11.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
+        }
+
+        public void CheckReg1()
+        {
+            //Begin Error Handling
+            try
+            {
+                //Sets variable for remote machine field
+                string remotemachine;
+                remotemachine = "192.168.130.11";
+                // hourglass cursor
+                Cursor.Current = Cursors.WaitCursor;
+
+                //Begin Code to check Registry
+                RegistryKey hive = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "ASPEN1", RegistryView.Registry64);
+                var key = hive.OpenSubKey(@"SOFTWARE\Wow6432Node\Memjet\Aspen\Controller", true);
+                if (key == null)
+                {
+                }
+                object oVal = key.GetValue("StitchOverlapMicrons"); if (null != oVal)
+                {
+                    label6.Text = oVal.ToString();
+                    //Return Curson
+                    Cursor.Current = Cursors.Default;
+                    //End Registry Check
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         public void CheckReg()
@@ -56,7 +89,7 @@ namespace Superweb_Restart_Application
 
                         ConnectionOptions oConn = new ConnectionOptions();
                         //oConn.Username = "memjet";
-                        oConn.Password = "memjet1";
+                        //oConn.Password = "memjet1";
                         System.Management.ManagementScope scope = new System.Management.ManagementScope(@"\\" + ServerName + @"\root\default", oConn);
 
                         scope.Options.EnablePrivileges = true;
@@ -95,7 +128,7 @@ namespace Superweb_Restart_Application
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -201,7 +234,7 @@ namespace Superweb_Restart_Application
                     progressDialog.ChangeLabel("Restarting: All Aspen Services");
                     progressDialog.Show();
 
-                    restartAspen();
+                    RestartAspen();
 
                     progressDialog.Close();
                     Cursor.Current = Cursors.Default;
@@ -215,7 +248,7 @@ namespace Superweb_Restart_Application
             }
         }
 
-        private void restartAspen()
+        private void RestartAspen()
         {
 
             int i = 1;

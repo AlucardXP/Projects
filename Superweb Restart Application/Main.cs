@@ -10,11 +10,15 @@ using AutoUpdaterDotNET;
 using System.Management;
 using System.Drawing;
 using System.Net;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Superweb_Restart_Application
 {
     public partial class Main : Form
     {
+        public string Descanso = @"C:\inetpubCedar\config\DescansoInit.xml";
+
         public Main()
         {
             InitializeComponent();
@@ -70,35 +74,36 @@ namespace Superweb_Restart_Application
             //    label2.Visible = false;
             //    StitchingStripMenuItem1.Visible = false;
             //}
-            //Timer timer = new Timer();
-            //timer.Interval = (10 * 1000); // 10 secs
-            //timer.Tick += new EventHandler(timer_Tick);
-            //timer.Start();
+            StitchingStatus();
+            Timer timer = new Timer();
+            timer.Interval = (10 * 1000); // 10 secs
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Settings frm = new Settings();
             frm.ShowDialog();
         }
 
-        private void statusToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Status frm = new Status();
             frm.ShowDialog();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox1 frm = new AboutBox1();
             frm.ShowDialog();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             if (comboBox1.Text == "")
             {
@@ -144,7 +149,7 @@ namespace Superweb_Restart_Application
                                 toolStripStatusLabel3.Text = checkedListBox1.Items[i].ToString();
                                 progressDialog.ChangeLabel("Restarting: " + toolStripStatusLabel3.Text);
                                 progressDialog.Show();
-                                reboot();
+                                Reboot();
 
                                 toolStripStatusLabel2.Text = "Status:";
                                 toolStripStatusLabel3.Text = "Idle";
@@ -161,12 +166,12 @@ namespace Superweb_Restart_Application
             }
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void CheckedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Called when a new index is selected.
             if (comboBox1.Text == "Aspen Services")
@@ -236,7 +241,7 @@ namespace Superweb_Restart_Application
             }
         }
         // Reboot Function
-        private void reboot()
+        private void Reboot()
         {
             // Use cmd shutdown if Boreggo is chosen
             if (comboBox1.Text == "Borrego Computers")
@@ -283,7 +288,7 @@ namespace Superweb_Restart_Application
             // Use iisreset for Aspen Services
             else if (comboBox1.Text == "Aspen Services")
             {
-                iisRestart();
+                IisRestart();
             }
             // Using SSH.NET package. "host","port","user","password"
             else if (comboBox1.Text == "Moby Computers")
@@ -298,11 +303,11 @@ namespace Superweb_Restart_Application
             }
             else if (comboBox1.Text == "Moby Computers - RIT")
             {
-                mobyRITReboot();
+                MobyRITReboot();
             }
         }
 
-        private void mobyRITReboot()
+        private void MobyRITReboot()
         {
             // Remote to each Boreggo and start a restart command for 4 Gymeas per machine
             // Use a batch file on the remote Boreggo that will launch plink and reboot all gymeas associated with each boreggo
@@ -347,7 +352,7 @@ namespace Superweb_Restart_Application
             }
         }
 
-        private void iisRestart()
+        private void IisRestart()
         {
             var serverName = "";
             if (toolStripStatusLabel1.Text == "Aspen 1")
@@ -436,7 +441,7 @@ namespace Superweb_Restart_Application
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
 
         }
@@ -452,14 +457,14 @@ namespace Superweb_Restart_Application
                 notifyIcon1.Visible = true;
             }
         }
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
             this.WindowState = FormWindowState.Normal;
             notifyIcon1.Visible = false;
         }
 
-        private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CheckForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AutoUpdater.Start("http://www.xpshosting.com/sw/update/update.xml");
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
@@ -508,84 +513,194 @@ namespace Superweb_Restart_Application
             }
         }
 
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             defaultsettings frm = new defaultsettings();
             frm.ShowDialog();
         }
 
-        private void testToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void TestToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Test frm = new Test();
             frm.ShowDialog();
         }
 
-        private void stitchingStatus()
+        private void StitchingStatus()
         {
-            //string machineName = string.Empty;
-            //IPHostEntry hostEntry = Dns.GetHostEntry("192.168.130.14");
-            //machineName = hostEntry.HostName;
+            ////string machineName = string.Empty;
+            ////IPHostEntry hostEntry = Dns.GetHostEntry("192.168.130.14");
+            ////machineName = hostEntry.HostName;
 
-            string ServerName = ConfigurationManager.AppSettings.Get("A4");
-            string regKeyToGet = @"SOFTWARE\Wow6432Node\Memjet\Aspen\Controller";
-            string keyToRead = "StitchOverlapMicrons";
+            //string ServerName = ConfigurationManager.AppSettings.Get("A4");
+            //string regKeyToGet = @"SOFTWARE\Wow6432Node\Memjet\Aspen\Controller";
+            //string keyToRead = "StitchOverlapMicrons";
 
-            ConnectionOptions oConn = new ConnectionOptions();
-            //oConn.Username = "Superweb";
-            //oConn.Password = "memjet1";
-            System.Management.ManagementScope scope = new System.Management.ManagementScope(@"\\" + ServerName + @"\root\default", oConn);
+            //ConnectionOptions oConn = new ConnectionOptions();
+            ////oConn.Username = "Superweb";
+            ////oConn.Password = "memjet1";
+            //System.Management.ManagementScope scope = new System.Management.ManagementScope(@"\\" + ServerName + @"\root\default", oConn);
 
-            scope.Options.EnablePrivileges = true;
-            scope.Connect();
+            //scope.Options.EnablePrivileges = true;
+            //scope.Connect();
 
-            ManagementClass registry = new ManagementClass(scope, new ManagementPath("StdRegProv"), null);
-            ManagementBaseObject inParams = registry.GetMethodParameters("GetStringValue");
+            //ManagementClass registry = new ManagementClass(scope, new ManagementPath("StdRegProv"), null);
+            //ManagementBaseObject inParams = registry.GetMethodParameters("GetStringValue");
 
-            inParams["sSubKeyName"] = regKeyToGet;
-            inParams["sValueName"] = keyToRead;
+            //inParams["sSubKeyName"] = regKeyToGet;
+            //inParams["sValueName"] = keyToRead;
 
-            ManagementBaseObject outParams = registry.InvokeMethod("GetStringValue", inParams, null);
-            // MessageBox.Show(outParams["sValue"].ToString());
-            toolStripStatusLabel1.Text = outParams["sValue"].ToString();
+            //ManagementBaseObject outParams = registry.InvokeMethod("GetStringValue", inParams, null);
+            //// MessageBox.Show(outParams["sValue"].ToString());
+            //toolStripStatusLabel1.Text = outParams["sValue"].ToString();
 
-            if (toolStripStatusLabel1.Text == "0")
-            {
-                label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = "Stitching Overlap is Disabled";
-            }
-            if (toolStripStatusLabel1.Text == "7112")
-            {
-                label2.ForeColor = System.Drawing.Color.Green;
-                label2.Text = "Stitching Overlap is Enabled";
-            }
+            //if (toolStripStatusLabel1.Text == "0")
+            //{
+            //    label2.ForeColor = System.Drawing.Color.Red;
+            //    label2.Text = "Stitching Overlap is Disabled";
+            //}
+            //if (toolStripStatusLabel1.Text == "7112")
+            //{
+            //    label2.ForeColor = System.Drawing.Color.Green;
+            //    label2.Text = "Stitching Overlap is Enabled";
+            //}
             //else
             //{
             //    label2.ForeColor = System.Drawing.Color.Red;
             //    label2.Text = "Error Reading Registry";
             //}
-            toolStripStatusLabel1.Text = "";
+
+
+            // Old code no longer works...idk why....Maybe this one does but stitching page got messed up?
+
+            XDocument xDoc = XDocument.Load(Descanso);
+            label3.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
+
+            toolStripStatusLabel1.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value; ;
+
+            if (toolStripStatusLabel1.Text == "false")
+            {
+                label3.ForeColor = System.Drawing.Color.Red;
+                label3.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
+                button2.Text = "Enable Stitching";
+            }
+            else
+            {
+                label3.ForeColor = System.Drawing.Color.Green;
+                label3.Text = xDoc.Descendants("stitchingEnabledSetting").First().Value;
+                button2.Text = "Disable Stitching";
+            }
+
+
+
+
         }
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            //stitchingStatus();
+            StitchingStatus();
         }
 
-        private void stitchingOffsetToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StitchingOffsetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StitchOffset frm = new StitchOffset();
             frm.ShowDialog();
         }
 
-        private void stitchOverlapToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StitchOverlapToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Stitching frm = new Stitching();
             frm.ShowDialog();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void Button2_Click_1(object sender, EventArgs e)
         {
             Password frm = new Password();
             frm.ShowDialog();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            if (button2.Text == "Enable Stitching")
+            {
+                XDocument xDoc = XDocument.Load(Descanso);
+                xDoc.Descendants("stitchingEnabledSetting").First().Value = "true";
+                xDoc.Save(Descanso);
+                StitchRestart();
+                StitchingStatus();
+            }
+            else if (button2.Text == "Disable Stitching")
+            {
+                XDocument xDoc = XDocument.Load(Descanso);
+                xDoc.Descendants("stitchingEnabledSetting").First().Value = "false";
+                xDoc.Save(Descanso);
+                StitchRestart();
+                StitchingStatus();
+            }
+        }
+        private void StitchRestart()
+        {
+
+            var serverName = "ASPEN4";
+            string appPoolName = ".NET 4.Cedar";
+            Cursor.Current = Cursors.WaitCursor;
+
+            if (!string.IsNullOrEmpty(serverName) && !string.IsNullOrEmpty(appPoolName))
+            {
+                try
+                {
+                    using (ServerManager manager = ServerManager.OpenRemote(serverName))
+                    {
+                        ApplicationPool appPool = manager.ApplicationPools.FirstOrDefault(ap => ap.Name == appPoolName);
+
+                        //Don't bother trying to recycle if we don't have an app pool
+                        if (appPool != null)
+                        {
+                            //Get the current state of the app pool
+                            bool appPoolRunning = appPool.State == ObjectState.Started || appPool.State == ObjectState.Starting;
+                            bool appPoolStopped = appPool.State == ObjectState.Stopped || appPool.State == ObjectState.Stopping;
+
+                            //The app pool is running, so stop it first.
+                            if (appPoolRunning)
+                            {
+                                //Wait for the app to finish before trying to stop
+                                while (appPool.State == ObjectState.Starting) { System.Threading.Thread.Sleep(1000); }
+
+                                //Stop the app if it isn't already stopped
+                                if (appPool.State != ObjectState.Stopped)
+                                {
+                                    appPool.Stop();
+                                }
+                                appPoolStopped = true;
+                            }
+
+                            //Only try restart the app pool if it was running in the first place, because there may be a reason it was not started.
+                            if (appPoolStopped && appPoolRunning)
+                            {
+                                //Wait for the app to finish before trying to start
+                                while (appPool.State == ObjectState.Stopping) { System.Threading.Thread.Sleep(1000); }
+
+                                //Start the app
+                                appPool.Start();
+                            }
+                            Cursor.Current = Cursors.Default;
+                            StitchingStatus();
+                        }
+                        else
+                        {
+                            throw new Exception(string.Format("An Application Pool does not exist with the name {0}.{1}", serverName, appPoolName));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Unable to restart the application pools for {0}.{1}", serverName, appPoolName), ex.InnerException);
+                }
+
+            }
         }
     }
 }
